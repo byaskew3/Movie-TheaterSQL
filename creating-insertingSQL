@@ -1,0 +1,236 @@
+--------------------------------------------------- CREATING ALL TABLES FROM ERD -----------------------------------------------
+CREATE TABLE customer(
+	customer_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(100),
+	last_name VARCHAR(100),
+	email VARCHAR(150),
+	mobile VARCHAR(20)
+);
+
+CREATE TABLE ticket(
+	ticket_id SERIAL PRIMARY KEY,
+	customer_id INTEGER NOT NULL,
+	movie_id INTEGER NOT NULL,
+	ticket_price NUMERIC(4,2),
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
+	FOREIGN KEY(movie_id) REFERENCES movie(movie_id),
+	ticket_date DATE DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE movie(
+	movie_id SERIAL PRIMARY KEY,
+	movie_name VARCHAR(100),
+	movie_duration NUMERIC(3,0)
+);
+
+CREATE TABLE concession(
+	food_id SERIAL PRIMARY KEY,
+	food_name VARCHAR(100),
+	food_price NUMERIC(5,2),
+	customer_id INTEGER NOT NULL,
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id)
+);
+
+----------------------------------------------- INSERTING DATA INTO TABLES ---------------------------------------------------------------------
+
+-- INSERT INTO CUSTOMER TABLE --
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	email,
+	mobile
+) VALUES (
+	1,
+	'Nicolle',
+	'Iron Moccasin',
+	'nicolle@gmail.com',
+	'123-456-7890'
+);
+
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	email,
+	mobile
+) VALUES (
+	4,
+	'Angela',
+	'Askew',
+	'angela@gmail.com',
+	'123-456-7890'
+);
+
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	email,
+	mobile
+) VALUES (
+	2,
+	'Christian',
+	'Askew',
+	'christian@gmail.com',
+	'123-456-7890'
+);
+
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	email,
+	mobile
+) VALUES (
+	3,
+	'Lawrence',
+	'Shields',
+	'lawrence@gmail.com',
+	'123-456-7890'
+);
+
+SELECT *
+FROM customer
+
+-- INSERT INTO MOVIE TABLE --
+
+INSERT INTO movie (
+	movie_name,
+	movie_duration
+) VALUES (
+	'A Quiet Place, Part II',
+	97
+);
+
+INSERT INTO movie (
+	movie_name,
+	movie_duration
+) VALUES (
+	'Alien',
+	117
+);
+
+INSERT INTO movie (
+	movie_name,
+	movie_duration
+) VALUES (
+	'Passengers',
+	116
+);
+
+INSERT INTO movie (
+	movie_name,
+	movie_duration
+) VALUES (
+	'Twilight',
+	122
+);
+
+SELECT *
+FROM movie
+
+-- INSERTING INTO TICKET TABLE --
+
+INSERT INTO ticket(
+	ticket_id,
+	ticket_price,
+	customer_id,
+	movie_id
+) VALUES (
+	1,
+	10.99,
+	1,
+	4	
+);
+
+INSERT INTO ticket(
+	ticket_id,
+	ticket_price,
+	customer_id,
+	movie_id
+) VALUES (
+	2,
+	10.99,
+	2,
+	1	
+);
+
+INSERT INTO ticket(
+	ticket_id,
+	ticket_price,
+	customer_id,
+	movie_id
+) VALUES (
+	3,
+	10.99,
+	3,
+	4	
+);
+
+INSERT INTO ticket(
+	ticket_id,
+	ticket_price,
+	customer_id,
+	movie_id
+) VALUES (
+	4,
+	10.99,
+	4,
+	2	
+);
+SELECT *
+FROM ticket
+
+-- INSERTING INTO CONCESSION TABLE --
+
+INSERT INTO concession(
+	food_id,
+	food_name,
+	food_price,
+	customer_id
+) VALUES (
+	1,
+	'Popcorn',
+	12.99,
+	2
+);
+
+INSERT INTO concession(
+	food_id,
+	food_name,
+	food_price,
+	customer_id
+) VALUES (
+	2,
+	'Candy',
+	10.99,
+	1
+);
+
+INSERT INTO concession(
+	food_id,
+	food_name,
+	food_price,
+	customer_id
+) VALUES (
+	3,
+	'Large Drink',
+	12.99,
+	3
+);
+
+INSERT INTO concession(
+	food_id,
+	food_name,
+	food_price,
+	customer_id
+) VALUES (
+	4,
+	'Nachos',
+	11.99,
+	3
+);
+
+SELECT *
+FROM concession
